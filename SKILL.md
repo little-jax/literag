@@ -1,8 +1,9 @@
 ---
 name: literag
-version: 0.2.0
+version: 0.2.1
 description: "Local retrieval skill for large documentation corpora using independent SQLite knowledge libraries with keyword plus vector hybrid search. Use when searching Blender manuals, API references, SDK docs, framework docs, product docs, blog/article archives, exported markdown doc sets, or any other large external documentation that should not live in OpenClaw's main memory index. Also use when indexing, reindexing, debugging retrieval quality, checking index compatibility/status, or inspecting LiteRAG sqlite metadata. Usage: /literag search <library> <query> | /literag inspect <library> <path> [--start N --end N] | /literag index <library> | /literag status <library> | /literag meta <library> | /literag benchmark <library> --query ..."
 user-invocable: true
+homepage: https://github.com/little-jax/literag
 metadata: { "openclaw": { "emoji": "📚", "requires": { "bins": ["python3"] } } }
 ---
 
