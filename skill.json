@@ -1,0 +1,45 @@
+{
+  "name": "literag",
+  "description": "Local retrieval skill for large documentation corpora using independent SQLite knowledge libraries with keyword plus vector hybrid search. Supports search, inspect, index, status, meta, and benchmark workflows for large external doc sets.",
+  "version": "0.2.0",
+  "author": "Little Jax / Mozi A.",
+  "license": "MIT-0",
+  "type": "code",
+  "runtime": "python>=3.10",
+  "entry_point": "bin/literag",
+  "install": {
+    "type": "pip",
+    "command": "pip install -r requirements.txt",
+    "packages": [
+      "sqlite-vec>=0.1.9"
+    ],
+    "source": "pypi"
+  },
+  "files": [
+    "SKILL.md",
+    "skill.json",
+    "requirements.txt",
+    "bin/literag",
+    "references/agent-prompts.md",
+    "references/configuration.md",
+    "references/optimization-playbook.md",
+    "references/usage.md",
+    "scripts/benchmark_library.py",
+    "scripts/index_all.py",
+    "scripts/index_library.py",
+    "scripts/inspect_result.py",
+    "scripts/literag_common.py",
+    "scripts/literag_runtime.py",
+    "scripts/meta_library.py",
+    "scripts/search_library.py",
+    "scripts/status_library.py"
+  ],
+  "openclaw": {
+    "emoji": "📚",
+    "requires": {
+      "bins": [
+        "python3"
+      ]
+    }
+  }
+}

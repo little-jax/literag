@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+SCRIPT_DIR = BASE_DIR / "scripts"
+
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from literag_runtime import preferred_python
+
+COMMANDS = {
+    "search": "search_library.py",
+    "inspect": "inspect_result.py",
+    "index": "index_library.py",
+    "index-all": "index_all.py",
+    "status": "status_library.py",
+    "meta": "meta_library.py",
+    "benchmark": "benchmark_library.py",
+}
+
+
+def main() -> int:
+    args = sys.argv[1:]
+    if not args or args[0] in {"-h", "--help", "help"}:
+        print("Usage: literag <search|inspect|index|index-all|status|meta|benchmark> ...")
+        return 0
+    command = args[0]
+    script = COMMANDS.get(command)
+    if script is None:
+        print(f"unknown command: {command}", file=sys.stderr)
+        return 2
+    cmd = [preferred_python(), str(SCRIPT_DIR / script), *args[1:]]
+    return subprocess.run(cmd).returncode
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
