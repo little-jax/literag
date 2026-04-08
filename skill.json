@@ -20,6 +20,7 @@
   },
   "files": [
     "SKILL.md",
+    "skill.md",
     "skill.json",
     "requirements.txt",
     "bin/literag",
