@@ -2,7 +2,13 @@
 
 Config file:
 
-- `.literag/knowledge-libs.json`
+- `<workspace>/.literag/knowledge-libs.json`
+
+Workspace resolution order:
+
+- `OPENCLAW_WORKSPACE` if set
+- otherwise `WORKSPACE` if set
+- otherwise LiteRAG walks upward from the current path/config path until it finds the OpenClaw workspace sentinel files (`AGENTS.md`, `SOUL.md`, `USER.md`, `MEMORY.md`)
 
 ## Rules
 
@@ -181,6 +187,8 @@ Each library may override:
 - Relative paths are resolved relative to the config file directory
 - `sqlitePath`, when present, also follows the same rule
 - Source `paths[].path` can be absolute or relative
+- Default sqlite placement is workspace-relative: `<workspace>/.literag/<library-id>.sqlite`
+- The workspace root is used for default config/sqlite locations; source indexing paths still come only from the configured library `paths`
 
 ## Recommended presets
 

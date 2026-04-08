@@ -1,6 +1,6 @@
 ---
 name: literag
-version: 0.2.1
+version: 0.2.2
 description: "Local retrieval skill for large documentation corpora using independent SQLite knowledge libraries with keyword plus vector hybrid search. Use when searching Blender manuals, API references, SDK docs, framework docs, product docs, blog/article archives, exported markdown doc sets, or any other large external documentation that should not live in OpenClaw's main memory index. Also use when indexing, reindexing, debugging retrieval quality, checking index compatibility/status, or inspecting LiteRAG sqlite metadata. Usage: /literag search <library> <query> | /literag inspect <library> <path> [--start N --end N] | /literag index <library> | /literag status <library> | /literag meta <library> | /literag benchmark <library> --query ..."
 user-invocable: true
 homepage: https://github.com/little-jax/literag
@@ -21,8 +21,9 @@ python3 -m pip install -r {baseDir}/requirements.txt
 
 ## Layout
 
-- Config + databases live under `/.literag/`
-- Main config: `/.literag/knowledge-libs.json`
+- Config + databases live under `<workspace>/.literag/`
+- Main config: `<workspace>/.literag/knowledge-libs.json`
+- Default workspace resolution order: `OPENCLAW_WORKSPACE` → `WORKSPACE` → walk upward from the current path until the OpenClaw workspace sentinel files are found
 - Core scripts live under `skills/literag/scripts/`
 - Skill bin entrypoint: `skills/literag/bin/literag`
 - Workspace convenience wrappers live at `scripts/literag-query.py`, `scripts/literag-index.py`, `scripts/literag-status.py`, `scripts/literag-meta.py`, and `scripts/lq`
@@ -39,7 +40,7 @@ python3 -m pip install -r {baseDir}/requirements.txt
 
 ## Read these files when needed
 
-- Always read `/.literag/knowledge-libs.json` when targeting a library or changing config
+- Always read `<workspace>/.literag/knowledge-libs.json` when targeting a library or changing config
 - Read `references/usage.md` when you need command examples, output schema, or the intended search → inspect workflow
 - Read `references/configuration.md` when adding libraries, source roots, excludes, chunking overrides, or ranking overrides
 - Read `references/agent-prompts.md` when another agent / ACP harness needs a ready-made LiteRAG prompt template
@@ -81,7 +82,7 @@ If the user gives a natural-language request instead of a strict subcommand, tra
 
 ## Operating workflow
 
-1. Read `/.literag/knowledge-libs.json`
+1. Read `<workspace>/.literag/knowledge-libs.json`
 2. Resolve the target library
 3. Run `search_library.py` for grouped retrieval
 4. If needed, run `inspect_result.py` on the top hit or chosen range
